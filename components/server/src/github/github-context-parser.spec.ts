@@ -189,6 +189,24 @@ class TestGithubContextParser {
         })
     }
 
+    @test public async testTreeContext_33() {
+        const result = await this.parser.handle({}, this.user, 'https://github.com/twtwtw-gj/covid19/blob/feature/%235847-%23add-gitpod-setting/LICENSE.txt');
+        expect(result).to.deep.include({
+            "ref": "feature/#5847-#add-gitpod-setting",
+            "refType": "branch",
+            "path": "LICENSE.txt",
+            "isFile": true,
+            "repository": {
+                "host": "github.com",
+                "owner": "twtwtw-gj",
+                "name": "covid19",
+                "cloneUrl": "https://github.com/twtwtw-gj/covid19.git",
+                "private": false
+            },
+            "title": "covid19/LICENSE.txt at feature/#5847-#add-gitpod-setting · twtwtw-gj/covid19"
+        })
+    }
+
     @test public async testTreeContext_04() {
         const result = await this.parser.handle({}, this.user, 'https://github.com/gitpod-io/gitpod-test-repo/blob/nametest/src/src/server.ts');
         expect(result).to.deep.include({
